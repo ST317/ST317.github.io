@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>かいるa.k.aボスティッチ</title>
+    <style>
+        body {
+            background-image: url('ツーショット.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            transition: background 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 40px;
+            background-color: #F3F3F3;
+            text-align: center;
+            padding: 5px 10px;
+            display: inline-block;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 24px;
+            padding: 20px 40px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .image-container img {
+            display: none;
+            width: 500px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">なんでしょ〜</h1>
+
+    <div class="image-container">
+        <button type="button" onclick="showImage(this, 'lightblue')">画像１</button>
+        <img src="寝落ち.jpg" alt="表示される画像">
+        <button type="button" class="back-button" style="display: none;" onclick="hideImage(this, 'ツーショット.jpg')">戻る</button>
+    </div>
+
+    <div class="image-container">
+        <button type="button" onclick="showImage(this, 'lightgreen')">画像２</button>
+        <img src="勉強.jpg" alt="表示される画像">
+        <button type="button" class="back-button" style="display: none;" onclick="hideImage(this, 'ツーショット.jpg')">戻る</button>
+    </div>
+
+    <script>
+        function showImage(button, bgColor) {
+            let img = button.nextElementSibling;
+            let backButton = img.nextElementSibling;
+            let allButtons = document.querySelectorAll(".image-container button:not(.back-button)");
+            let title = document.getElementById("title");
+            
+            allButtons.forEach(btn => btn.style.display = "none");
+            title.style.display = "none"; // 「なんでしょ〜」を消す
+            img.style.display = "block";
+            backButton.style.display = "block";
+            document.body.style.backgroundImage = "none";
+            document.body.style.backgroundColor = bgColor;
+        }
+
+        function hideImage(button, bgImage) {
+            let img = button.previousElementSibling;
+            let allButtons = document.querySelectorAll(".image-container button:not(.back-button)");
+            let title = document.getElementById("title");
+            
+            img.style.display = "none";
+            button.style.display = "none";
+            allButtons.forEach(btn => btn.style.display = "block");
+            title.style.display = "block"; // 「なんでしょ〜」を再表示
+            document.body.style.backgroundImage = "url('" + bgImage + "')";
+            document.body.style.backgroundColor = "";
+        }
+    </script>
+</body>
+</html>
